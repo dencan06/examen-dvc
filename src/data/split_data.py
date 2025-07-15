@@ -1,11 +1,10 @@
 # src/data/split_data.py
 import pandas as pd
 from sklearn.model_selection import train_test_split
-import joblib
 import os
 
 df = pd.read_csv("data/raw_data/raw.csv")
-df = df.drop(columns='date', inplace=True)
+df.drop(columns='date', inplace=True)
 X = df.iloc[:, :-1]
 y = df.iloc[:, -1]
 

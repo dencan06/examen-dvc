@@ -7,12 +7,12 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
 
 # Load data
-X_train = pd.read_csv("data/processed/X_train_scaled.csv")
-y_train = pd.read_csv("data/processed/y_train.csv").values.ravel()
+X_train = pd.read_csv("data/processed_data/X_train_scaled.csv")
+y_train = pd.read_csv("data/processed_data/y_train.csv").values.ravel()
 
 # Load parameters from YAML
 with open("params.yaml", "r") as f:
-    params = yaml.safe_load()
+    params = yaml.safe_load(f)
 
 grid_params = params["grid_search"]["param_grid"]
 
@@ -28,4 +28,4 @@ grid_search = GridSearchCV(model, grid_params, cv=5, scoring="r2", n_jobs=-1)
 grid_search.fit(X_train, y_train)
 
 # Save best params
-joblib.dump(grid_search.best_params_, "models/models/best_params.pkl")
+joblib.dump(grid_search.best_params_, "models/best_params.pkl")
